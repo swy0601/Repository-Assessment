@@ -1,0 +1,13 @@
+# <mask0>
+def tokenize(document: str, handle=True):
+    document = document.lower()
+    match_pattern = re.findall(r'\b[a-z]{3,15}\b', document)
+    frequency = {}
+    for word in match_pattern:
+        count = frequency.get(word, 0)
+        if handle:
+            word = STEMMER.stem(word)
+            if word in STOP_WORDS:
+                continue
+        frequency[word] = count + 1
+    return frequency
